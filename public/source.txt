@@ -1,4 +1,4 @@
-# Hello I'm [Ananta](https://github.com/codeAntu)
+# Hello, I'm [Ananta](https://github.com/codeAntu)
 You will like those projects!
 
 ---
@@ -78,13 +78,7 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 ![Minion](https://octodex.github.com/images/minion.png)
 ![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
 
-## Plugins
-
-The killer feature of `markdown-it` is very effective support of
-[syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
-
-## Lists
-
+## Lists (beta)
 Unordered
 
 - Create a list by starting a line with `+`, `-`, or `*`
@@ -111,11 +105,4 @@ Start numbering with offset:
 57. foo
 1. bar
 
-### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
-
-> Classic markup: :wink: :cry: :laughing: :yum:
->
-> > Shortcuts (emoticons): :-) :-( 8-) ;)
-
-see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
-  
+   
