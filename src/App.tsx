@@ -24,7 +24,7 @@ export function App() {
 
   useEffect(() => {
     (async () => {
-      const temp = await fetch("/source.md");
+      const temp = await fetch("/source.txt");
       const text = await temp.text();
       setText(text);
       setText(text);
@@ -48,8 +48,7 @@ export function App() {
           Markdown Compiler{" "}
         </div>
         <div className="text-sm font-semibold text-center px-8 py-2 bg-[#252f3e] rounded-full ">
-          {" "}
-          Source Code{" "}
+          <a href="https://github.com/codeAntu/md--"> Source Code</a>
         </div>
       </div>
       <div className="grid gap-2 sm:grid-cols-2 ">
