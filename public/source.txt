@@ -1,3 +1,4 @@
+# Hello I'm [Ananta](https://github.com/codeAntu)
 You will like those projects!
 
 ---
@@ -22,9 +23,6 @@ You will like those projects!
 
 ---
 
-## Typographic replacements
-
-Enable typographer option to see result.
 
 ## Emphasis
 
@@ -120,3 +118,4 @@ Start numbering with offset:
 > > Shortcuts (emoticons): :-) :-( 8-) ;)
 
 see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
+  
