@@ -61,7 +61,6 @@ Syntax highlighting
 var foo = function (bar) {
   return bar++;
 };
-
 console.log(foo(5));
 ```
 
@@ -105,4 +104,4 @@ Start numbering with offset:
 57. foo
 1. bar
 
-   
+    
