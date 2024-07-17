@@ -1,4 +1,4 @@
-import tokenize from "../findChild";
+import tokenize from '../findChild';
 
 export default function Heading(text: string) {
   let tokens = {} as any;
@@ -11,19 +11,19 @@ export default function Heading(text: string) {
       let header = headerMatch[0];
       // console.log(header);
       let headerSize = header.length - 1;
-      let value = text.replace(headerRegex, "");
+      let value = text.replace(headerRegex, '');
 
       tokens.type = `h${headerSize}`;
       tokens.children = tokenize(value);
     } else {
-      tokens.type = "p";
+      tokens.type = 'p';
       tokens.value = text;
     }
 
     return tokens;
   } else {
     // Handle the case where the text is undefined or doesn't match the expected pattern
-    tokens.type = "span";
+    tokens.type = 'span';
     tokens.children = tokenize(text);
     return tokens;
   }

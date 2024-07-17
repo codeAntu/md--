@@ -1,4 +1,4 @@
-import { Token } from "./types";
+import { Token } from './types';
 
 export default function tokenize(text: string) {
   const children = [] as Token[];
@@ -7,46 +7,42 @@ export default function tokenize(text: string) {
 
   //
   while (current < text.length) {
-    if (text[current] === "\n") {
+    if (text[current] === '\n') {
       current++;
       continue;
     }
 
     // simple text to span component
-    if (text[current] != "_" && text[current].match(/[\w\s]/g)) {
+    if (text[current] != '_' && text[current].match(/[\w\s]/g)) {
       let start = current;
-      let value = "";
+      let value = '';
 
-      while (
-        current < text.length &&
-        text[current] != "_" &&
-        text[current].match(/[\w\s]/g)
-      ) {
+      while (current < text.length && text[current] != '_' && text[current].match(/[\w\s]/g)) {
         value += text[current];
         current++;
       }
 
       children.push({
-        type: "text",
+        type: 'text',
         value: value,
       });
       continue;
     }
 
-    if (text[current] === "[") {
-      let value = "";
-      let link = "";
+    if (text[current] === '[') {
+      let value = '';
+      let link = '';
       let start = current;
       current++; // skip '['
-      while (current < text.length && text[current] !== "]") {
+      while (current < text.length && text[current] !== ']') {
         value += text[current];
         current++;
       }
       current++; // skip ']'
 
-      if (current < text.length && text[current] === "(") {
+      if (current < text.length && text[current] === '(') {
         current++; // skip '('
-        while (current < text.length && text[current] !== ")") {
+        while (current < text.length && text[current] !== ')') {
           link += text[current];
           current++;
         }
@@ -54,7 +50,7 @@ export default function tokenize(text: string) {
 
         if (current <= text.length) {
           children.push({
-            type: "link",
+            type: 'link',
             link: link,
             children: tokenize(value),
           });
@@ -68,29 +64,29 @@ export default function tokenize(text: string) {
     }
 
     // img
-    if (text[current] === "!") {
-      let value = "";
-      let link = "";
+    if (text[current] === '!') {
+      let value = '';
+      let link = '';
       let start = current;
 
       current++; // Move past '!'
-      if (text[current] === "[") {
+      if (text[current] === '[') {
         current++; // Move past '['
-        while (current < text.length && text[current] !== "]") {
+        while (current < text.length && text[current] !== ']') {
           value += text[current];
           current++;
         }
         current++; // Move past ']'
-        if (text[current] === "(") {
+        if (text[current] === '(') {
           current++; // Move past '('
-          while (current < text.length && text[current] !== ")") {
+          while (current < text.length && text[current] !== ')') {
             link += text[current];
             current++;
           }
           current++; // Move past ')'
           if (current <= text.length) {
             children.push({
-              type: "img",
+              type: 'img',
               link: link,
               value: value,
             });
@@ -107,20 +103,20 @@ export default function tokenize(text: string) {
     }
 
     // code component
-    if (text[current] === "`") {
-      let value = "";
+    if (text[current] === '`') {
+      let value = '';
       let start = current;
 
       current++; // skip '`'
-      while (current < text.length && text[current] !== "`") {
+      while (current < text.length && text[current] !== '`') {
         value += text[current];
         current++;
       }
 
-      if (current < text.length && text[current] === "`") {
+      if (current < text.length && text[current] === '`') {
         current++; // skip '`'
         children.push({
-          type: "code",
+          type: 'code',
           value: value,
         });
         continue;
@@ -131,42 +127,35 @@ export default function tokenize(text: string) {
 
     // bold **text**
 
-    if (text[current] === "*") {
+    if (text[current] === '*') {
       let start = current;
       current++;
-      if (text[current] === "*") {
+      if (text[current] === '*') {
         current++;
-        let extra = "";
-        while (current < text.length && text[current] === "*") {
+        let extra = '';
+        while (current < text.length && text[current] === '*') {
           extra += text[current];
           current++;
         }
 
         children.push({
-          type: "text",
+          type: 'text',
           value: extra,
         });
-        if (text[current] !== " ") {
-          let value = "";
+        if (text[current] !== ' ') {
+          let value = '';
           while (
             current < text.length &&
-            !(
-              text[current] === "*" &&
-              text[current - 1] !== " " &&
-              text[current - 1] !== "*"
-            )
+            !(text[current] === '*' && text[current - 1] !== ' ' && text[current - 1] !== '*')
           ) {
             value += text[current];
             current++;
           }
 
-          if (
-            current < text.length &&
-            text.slice(current, current + 2) === "**"
-          ) {
+          if (current < text.length && text.slice(current, current + 2) === '**') {
             current += 2;
             children.push({
-              type: "bold",
+              type: 'bold',
               children: tokenize(value),
             });
             continue;
@@ -183,37 +172,33 @@ export default function tokenize(text: string) {
 
     // italic _text_
 
-    if (text[current] === "_") {
+    if (text[current] === '_') {
       let start = current;
       current++;
-      let extra = "";
-      while (current < text.length && text[current] === "_") {
+      let extra = '';
+      while (current < text.length && text[current] === '_') {
         extra += text[current];
         current++;
       }
 
       children.push({
-        type: "text",
+        type: 'text',
         value: extra,
       });
-      if (text[current] !== " ") {
-        let value = "";
+      if (text[current] !== ' ') {
+        let value = '';
         while (
           current < text.length &&
-          !(
-            text[current] === "_" &&
-            text[current - 1] !== " " &&
-            text[current - 1] !== "_"
-          )
+          !(text[current] === '_' && text[current - 1] !== ' ' && text[current - 1] !== '_')
         ) {
           value += text[current];
           current++;
         }
 
-        if (current < text.length && text[current] === "_") {
+        if (current < text.length && text[current] === '_') {
           current++;
           children.push({
-            type: "italic",
+            type: 'italic',
             children: tokenize(value),
           });
           continue;
@@ -227,42 +212,35 @@ export default function tokenize(text: string) {
 
     // strike through
 
-    if (text[current] === "~") {
+    if (text[current] === '~') {
       let start = current;
       current++;
-      if (text[current] === "~") {
+      if (text[current] === '~') {
         current++;
-        let extra = "";
-        while (current < text.length && text[current] === "~") {
+        let extra = '';
+        while (current < text.length && text[current] === '~') {
           extra += text[current];
           current++;
         }
 
         children.push({
-          type: "text",
+          type: 'text',
           value: extra,
         });
-        if (text[current] !== " ") {
-          let value = "";
+        if (text[current] !== ' ') {
+          let value = '';
           while (
             current < text.length &&
-            !(
-              text[current] === "~" &&
-              text[current - 1] !== " " &&
-              text[current - 1] !== "~"
-            )
+            !(text[current] === '~' && text[current - 1] !== ' ' && text[current - 1] !== '~')
           ) {
             value += text[current];
             current++;
           }
 
-          if (
-            current < text.length &&
-            text.slice(current, current + 2) === "~~"
-          ) {
+          if (current < text.length && text.slice(current, current + 2) === '~~') {
             current += 2;
             children.push({
-              type: "strike",
+              type: 'strike',
               children: tokenize(value),
             });
             continue;
@@ -278,13 +256,13 @@ export default function tokenize(text: string) {
     }
 
     if (true) {
-      let value = "";
-      while (current < text.length && text[current] !== " ") {
+      let value = '';
+      while (current < text.length && text[current] !== ' ') {
         value += text[current];
         current++;
       }
       children.push({
-        type: "text",
+        type: 'text',
         value: value,
       });
     }

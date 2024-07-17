@@ -1,4 +1,4 @@
-import tokenize from "../findChild";
+import tokenize from '../findChild';
 
 export default function olList(text: string, level: number, space: number) {
   const tokens = [] as any[];
@@ -6,7 +6,7 @@ export default function olList(text: string, level: number, space: number) {
 
   while (current < text.length) {
     let spaces = 0;
-    while (text[current] === " ") {
+    while (text[current] === ' ') {
       spaces++;
       current++;
     }
@@ -14,34 +14,34 @@ export default function olList(text: string, level: number, space: number) {
     if (
       spaces === level * 3 + space &&
       text[current].match(/[0-9]/g) &&
-      text[current + 1] === "." &&
-      text[current + 2] === " "
+      text[current + 1] === '.' &&
+      text[current + 2] === ' '
     ) {
       current += 2;
-      let value = "";
-      while (current < text.length && !(text[current] === "\n")) {
+      let value = '';
+      while (current < text.length && !(text[current] === '\n')) {
         value += text[current];
         current++;
       }
 
       tokens.push({
-        type: "li",
+        type: 'li',
         children: tokenize(value),
       });
 
       continue;
     } else {
-      let value = "";
-      console.log("in loop 3");
+      let value = '';
+      console.log('in loop 3');
 
-      while (current < text.length && text[current] !== "\n") {
+      while (current < text.length && text[current] !== '\n') {
         value += text[current];
         current++;
       }
       console.log(current);
 
       tokens.push({
-        type: "span",
+        type: 'span',
         children: tokenize(value),
       });
     }

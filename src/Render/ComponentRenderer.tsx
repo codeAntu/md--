@@ -1,4 +1,4 @@
-import { Token } from "../token/types";
+import { Token } from '../token/types';
 
 export default function Exp({ components }: { components: Token[] }) {
   if (components == undefined) return null;
@@ -7,139 +7,122 @@ export default function Exp({ components }: { components: Token[] }) {
     <>
       {components.map((component, index) => {
         switch (component.type) {
-          case "text":
+          case 'text':
             return (
-              <span key={index} className="p">
+              <span key={index} className='p'>
                 {component.value}
               </span>
             );
-          case "bold":
+          case 'bold':
             return (
-              <b key={index} className="strong">
+              <b key={index} className='strong'>
                 <Exp components={component.children!} />
               </b>
             );
-          case "italic":
+          case 'italic':
             return (
               <i key={index}>
                 <Exp components={component.children!} />
               </i>
             );
-          case "link":
+          case 'link':
             return (
-              <a key={index} href={component.link} className="a">
+              <a key={index} href={component.link} className='a'>
                 {component.value}
                 <Exp components={component.children!} />
               </a>
             );
-          case "strike":
+          case 'strike':
             return (
-              <del key={index} className="">
+              <del key={index} className=''>
                 <Exp components={component.children!} />
               </del>
             );
-          case "blockquote":
+          case 'blockquote':
             return (
-              <div
-                key={index}
-                className=" m-2 border-l-4 px-3 rounded-sm border-slate-500"
-              >
-                {component.children ? (
-                  <Exp components={component.children} />
-                ) : null}
+              <div key={index} className='m-2 rounded-sm border-l-4 border-slate-500 px-3'>
+                {component.children ? <Exp components={component.children} /> : null}
               </div>
             );
-          case "code":
+          case 'code':
             return (
-              <span key={index} className="code">
+              <span key={index} className='code'>
                 {component.value}
               </span>
             );
-          case "codeblock":
+          case 'codeblock':
             return (
-              <p key={index} className="codeblock whitespace-pre">
+              <p key={index} className='codeblock whitespace-pre'>
                 {component.value}
               </p>
             );
-          case "hr":
+          case 'hr':
+            return <hr key={index} className='border-1 my-4 border-solid border-gray-300' />;
+          case 'img':
+            return <img key={index} src={component.link} alt={component.value} className='img my-3 inline-block' />;
+          case 'ul':
             return (
-              <hr
-                key={index}
-                className="border-gray-300 border-solid border-1 my-4"
-              />
-            );
-          case "img":
-            return (
-              <img
-                key={index}
-                src={component.link}
-                alt={component.value}
-                className="img inline-block my-3"
-              />
-            );
-          case "ul":
-            return (
-              <ul key={index} className=" ">
+              <ul key={index} className=' '>
                 <Exp components={component.children!} />
               </ul>
             );
-          case "ol":
+          case 'ol':
             return (
-              <ol key={index} className="">
+              <ol key={index} className=''>
                 <Exp components={component.children!} />
               </ol>
             );
-          case "li":
+          case 'li':
             return (
-              <li key={index} className="font-bold">
+              <li key={index} className='font-bold'>
                 <Exp components={component.children!} />
               </li>
             );
-          case "paragraph":
+          case 'paragraph':
             return (
-              <p key={index} className="">
+              <p key={index} className=''>
                 <Exp components={component.children!} />
               </p>
             );
-          case "h1":
+          case 'h1':
             return (
-              <h1 key={index} className="h1">
+              <h1 key={index} className='h1'>
                 <Exp components={component.children!} />
               </h1>
             );
-          case "h2":
+          case 'h2':
             return (
-              <h2 key={index} className="h2">
+              <h2 key={index} className='h2'>
                 <Exp components={component.children!} />
               </h2>
             );
-          case "h3":
+          case 'h3':
             return (
-              <h3 key={index} className="h3">
+              <h3 key={index} className='h3'>
                 <Exp components={component.children!} />
               </h3>
             );
-          case "h4":
+          case 'h4':
             return (
-              <h4 key={index} className="h4">
+              <h4 key={index} className='h4'>
                 <Exp components={component.children!} />
               </h4>
             );
-          case "h5":
+          case 'h5':
             return (
-              <h5 key={index} className="h5">
+              <h5 key={index} className='h5'>
                 <Exp components={component.children!} />
               </h5>
             );
-          case "h6":
+          case 'h6':
             return (
-              <h6 key={index} className="h6">
+              <h6 key={index} className='h6'>
                 <Exp components={component.children!} />
               </h6>
             );
-          case "span":
+          case 'span':
             return (
-              <span key={index} className="span">
+              <span key={index} className='span'>
                 <Exp components={component.children!} />
               </span>
             );

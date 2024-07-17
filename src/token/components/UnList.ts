@@ -1,4 +1,4 @@
-import tokenize from "../findChild";
+import tokenize from '../findChild';
 
 export default function unList(text: string, level: number, space: number) {
   let token = [] as any[];
@@ -6,36 +6,33 @@ export default function unList(text: string, level: number, space: number) {
 
   while (current < text.length) {
     let spaces = 0;
-    while (text[current] === " ") {
+    while (text[current] === ' ') {
       spaces++;
       current++;
     }
 
-    if (
-      spaces === level * 3 + space &&
-      (text[current] === "*" || text[current] === "-" || text[current] === "+")
-    ) {
+    if (spaces === level * 3 + space && (text[current] === '*' || text[current] === '-' || text[current] === '+')) {
       current++;
 
-      if (text[current] === " ") {
+      if (text[current] === ' ') {
         current++;
-        let value = "";
-        while (current < text.length && !(text[current] === "\n")) {
+        let value = '';
+        while (current < text.length && !(text[current] === '\n')) {
           value += text[current];
           current++;
         }
         token.push({
-          type: "li",
+          type: 'li',
           children: tokenize(value),
         });
       } else {
-        let value = "";
-        while (current < text.length && text[current] !== "\n") {
+        let value = '';
+        while (current < text.length && text[current] !== '\n') {
           value += text[current];
           current++;
         }
         token.push({
-          type: "span",
+          type: 'span',
           children: tokenize(value),
         });
       }
@@ -75,17 +72,17 @@ export default function unList(text: string, level: number, space: number) {
     //   continue;
     // }
     else {
-      let value = "";
-      console.log("in loop 3");
+      let value = '';
+      console.log('in loop 3');
 
-      while (current < text.length && text[current] !== "\n") {
+      while (current < text.length && text[current] !== '\n') {
         value += text[current];
         current++;
       }
       console.log(current);
 
       token.push({
-        type: "span",
+        type: 'span',
         children: tokenize(value),
       });
     }
