@@ -3,11 +3,16 @@ import tokenize from './findChild';
 import Blockquote from './components/Blockquotes';
 import unList from './components/UnList';
 import olList from './components/List';
+import { Token } from './types';
 
 export default function findComponents(text: string) {
   const components = [];
   let current = 0;
   const size = text.length;
+
+  if (size === 0) {
+    return [] as Token[];
+  }
 
   while (current < size) {
     if (text[current] === '\n' || text[current] === ' ') {
@@ -17,13 +22,29 @@ export default function findComponents(text: string) {
 
     // header
     if (text[current] === '#') {
-      let value = '';
-      while (current < size && text[current] !== '\n') {
-        value += text[current];
+      let headerSize = 0;
+      while (current < size && text[current] === '#') {
+        headerSize++;
         current++;
       }
-      components.push(Heading(value.trim())); // Trim heading value
+      let start = current;
+      while (current < size && text[current] !== '\n') {
+        current++;
+      }
+
+      let tokens = {} as any;
+      tokens.type = `h${headerSize}`;
+      tokens.children = tokenize(text.slice(start, current).trim());
+      components.push(tokens);
       continue;
+
+      // currently not in use
+      // let start = current;
+      // while (current < size && text[current] !== '\n') {
+      //   current++;
+      // }
+      // components.push(Heading(text.slice(start, current).trim())); // Trim heading value
+      // continue;
     }
 
     // Code block ```js  ```
@@ -50,10 +71,11 @@ export default function findComponents(text: string) {
         }
         current++;
 
+        let start = current;
         while (current < size && text.slice(current, current + 3) !== '```') {
-          value += text[current];
           current++;
         }
+        let end = current;
 
         current += 2;
 
@@ -67,8 +89,9 @@ export default function findComponents(text: string) {
         components.push({
           type: 'codeblock',
           language: language,
-          value: value,
+          value: text.slice(start, end).trim(),
         });
+
         current++;
         continue;
       } else {
@@ -76,7 +99,7 @@ export default function findComponents(text: string) {
       }
     }
 
-    //  > Blockquotes
+    //  > Blockquotes  todo: add support for multiple blockquotes
     if (text[current] === '>') {
       let value = '';
       while (current < size && !(text[current] === '\n' && text[current + 1] === '\n')) {
@@ -152,14 +175,13 @@ export default function findComponents(text: string) {
     }
 
     {
-      let value = '';
+      let start = current;
       while (current < size && !(text[current] === '\n' && text[current + 1] === '\n')) {
-        value += text[current];
         current++;
       }
       const paragraph = {
         type: 'paragraph',
-        children: tokenize(value.trim()), // Trim paragraph value
+        children: tokenize(text.slice(start, current).trim()), // Trim paragraph value
       };
       components.push(paragraph);
       continue;

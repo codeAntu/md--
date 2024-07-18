@@ -21,6 +21,7 @@ export function App() {
     const end = performance.now();
     setStart(start);
     setEnd(end);
+    // if (temp == undefined) return setComponent([] as Token[]); 
     setComponent(temp);
   }
 
@@ -39,7 +40,7 @@ export function App() {
     }, 1);
   }
 
-  console.log(text);
+  // console.log(text);
 
   // console.log(component);
 
@@ -68,7 +69,7 @@ export function App() {
           <div className='flex w-full items-center justify-normal border-b border-gray-800 bg-[#1e293b20] px-4 py-3'>
             <div className='text-lg font-medium'>Editor</div>
             <div className='flex flex-grow items-center justify-end gap-2'>
-              <div className='hidden justify-center gap-2 rounded-full bg-[#1e293b] py-1 pl-1.5 pr-2.5 text-sm font-semibold lg:flex'>
+              <div className='pl-1.5z hidden justify-center gap-2 rounded-full bg-[#1e293b] py-1 pl-1.5 pr-2.5 text-sm font-semibold lg:flex'>
                 <div className='rounded-full bg-blue px-2 text-sm text-white'>{text.length}</div>
                 <div>Chars</div>
               </div>
