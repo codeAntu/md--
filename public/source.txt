@@ -1,5 +1,12 @@
 # Hello, I'm [Ananta](https://github.com/codeAntu)
-You will like those projects!
+
+
+A markdown compiler. using react and typescript .
+
+Tokenizes text and builds an Abstract Syntax Tree (AST) through string parsing. The renderer constructs HTML components from the AST recursively using React.
+
+
+  You will love those projects!
 
 ---
 
