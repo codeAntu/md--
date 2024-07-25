@@ -44,14 +44,14 @@
   font-weight: 600;
   padding-bottom: 0.3em;
   font-size: 2em;
-  /* border-bottom: 1px solid hsla(210, 18%, 87%, 1); */
+  border-bottom: 1px solid hsla(210, 18%, 87%, 0.5);
 }
 
 .h2 {
   font-weight: 600;
   padding-bottom: 0.3em;
   font-size: 1.5em;
-  border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+  border-bottom: 1px solid hsla(210, 18%, 87%, 0.5 );
 }
 
 .h3 {

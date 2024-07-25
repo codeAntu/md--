@@ -57,7 +57,7 @@ export default function Exp({ components }: { components: Token[] }) {
               </p>
             );
           case 'hr':
-            return <hr key={index} className='border-1 my-4 border-solid border-gray-300' />;
+            return <hr key={index} className='border-1 my-4 border-solid border-gray-300/50' />;
           case 'img':
             return <img key={index} src={component.link} alt={component.value} className='img my-3 inline-block' />;
           case 'ul':

@@ -11,6 +11,10 @@ export function App() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    demo();
+  }, []);
+
+  useEffect(() => {
     compile();
   }, [text]);
 
@@ -73,9 +77,9 @@ export function App() {
                 <div className='rounded-full bg-blue px-2 text-sm text-white'>{text.length}</div>
                 <div>Chars</div>
               </div>
-              <button className='rounded-3xl bg-blue px-3 py-0.5 text-sm font-semibold' onClick={demo}>
+              {/* <button className='rounded-3xl bg-blue px-3 py-0.5 text-sm font-semibold' onClick={demo}>
                 Demo
-              </button>
+              </button> */}
               <button className='rounded-3xl bg-blue px-3 py-0.5 text-sm font-semibold' onClick={clear}>
                 Clear
               </button>
@@ -102,9 +106,9 @@ export function App() {
               <button className='rounded-3xl bg-blue px-3 py-0.5 text-sm font-semibold' onClick={compile}>
                 Refresh
               </button>
-              <button className='rounded-3xl bg-blue px-3 py-0.5 text-sm font-semibold shadow-blue drop-shadow-2xl'>
+              {/* <button className='rounded-3xl bg-blue px-3 py-0.5 text-sm font-semibold shadow-blue drop-shadow-2xl'>
                 Auto
-              </button>
+              </button> */}
             </div>
           </div>
           <div className='h-[50dvh] overflow-auto p-5 text-[#e6edf3] sm:h-[70dvh] lg:h-[80dvh]'>
